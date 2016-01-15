@@ -14,3 +14,4 @@
   * Added `GanbaroDigital\OperatingSystem\OsType\Values\OSX` for OSX operating systems
 * Support for detecting which kind of operating system we are running on
   * Added `GanbaroDigital\OperatingSystem\OsType\Checks\HasEtcIssue` to check for Linux-specific distro info
+  * Added `GanbaroDigital\OperatingSystem\OsType\ValueBuilders\BuildTypeFromEtcIssue` to use `/etc/issue` to determine which Linux distro
