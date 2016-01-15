@@ -51,13 +51,13 @@ interface BuildTypeFromFile
      * use the output of a specific file (if present) to determine which
      * Linux distro we are using
      *
-     * @param  string $path
+     * @param  string $pathToFile
      *         path to the file to parse or the binary to run
      * @return null|OsType
      *         OsType if we know which Linux distro we are using
      *         null otherwise
      */
-    public function __invoke($path);
+    public function __invoke($pathToFile);
 
     /**
      * use the output of a specific file (if present) to determine which
@@ -73,7 +73,7 @@ interface BuildTypeFromFile
      * use the output of a specific file (if present) to determine which
      * Linux distro we are using
      *
-     * @param  string $path
+     * @param  string $pathToFile
      *         path to the file to parse or the binary to run
      * @return null|OsType
      *         OsType if we know which Linux distro we are using

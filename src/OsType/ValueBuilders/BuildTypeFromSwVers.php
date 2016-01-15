@@ -52,24 +52,47 @@ use GanbaroDigital\TextTools\Filters\FilterColumns;
 
 class BuildTypeFromSwVers implements BuildTypeFromFile
 {
-    public function __invoke($path = "/usr/bin/sw_vers")
+    /**
+     * use the output of /usr/bin/sw_vers (if present) to determine which
+     * operating system we are using
+     *
+     * @param  string $pathToBinary
+     *         path to the binary to run
+     * @return null|OsType
+     *         OsType if we know which operating system we are using
+     *         null otherwise
+     */
+    public function __invoke($pathToBinary = "/usr/bin/sw_vers")
     {
-        return self::usingPath($path);
+        return self::usingPath($pathToBinary);
     }
 
+    /**
+     * use the output of /usr/bin/sw_vers (if present) to determine which
+     * operating system we are using
+     *
+     * @return null|OsType
+     *         OsType if we know which operating system we are using
+     *         null otherwise
+     */
     public static function usingDefaultPath()
     {
         return self::usingPath("/usr/bin/sw_vers");
     }
 
+    /**
+     * use the output of /usr/bin/sw_vers (if present) to determine which
+     * operating system we are using
+     *
+     * @param  string $pathToBinary
+     *         path to the binary to run
+     * @return null|OsType
+     *         OsType if we know which operating system we are using
+     *         null otherwise
+     */
     public static function usingPath($pathToBinary)
     {
-        $output = self::getOutputFromBinary($pathToBinary);
-        if ($output === null) {
-            return null;
-        }
-
-        list($productName, $productVersion) = self::extractOsDetails($output);
+        list($productName, $productVersion) = self::getOsDetails($pathToBinary);
         if ($productName === null || $productVersion === null) {
             return null;
         }
@@ -83,6 +106,33 @@ class BuildTypeFromSwVers implements BuildTypeFromFile
         return $osType;
     }
 
+    /**
+     * call /usr/bin/sw_vers to get details about this operating system
+     *
+     * @param  string $pathToBinary
+     *         path to the binary to run
+     * @return array
+     *         [0] is the operating system name
+     *         [1] is the operating system version
+     */
+    private static function getOsDetails($pathToBinary)
+    {
+        $output = self::getOutputFromBinary($pathToBinary);
+        if ($output === null) {
+            return null;
+        }
+
+        return self::extractOsDetails($output);
+    }
+
+    /**
+     * call /usr/bin/sw_vers and return the output
+     *
+     * @param  string $pathToBinary
+     *         path to the binary to call
+     * @return string
+     *         output from the binary
+     */
     private static function getOutputFromBinary($pathToBinary)
     {
         // make sure we have an executable binary
@@ -100,6 +150,16 @@ class BuildTypeFromSwVers implements BuildTypeFromFile
         return $result->getOutput();
     }
 
+    /**
+     * parse the output of /usr/bin/sw_vers to get details about
+     * this operating system
+     *
+     * @param  string $output
+     *         output from /usr/bin/sw_vers
+     * @return array
+     *         [0] is the operating system name
+     *         [1] is the operating system version
+     */
     private static function extractOsDetails($output)
     {
         // what do we have?
@@ -110,6 +170,16 @@ class BuildTypeFromSwVers implements BuildTypeFromFile
         return [$productName, $productVersion];
     }
 
+    /**
+     * extract a named field from the output of /usr/bin/sw_vers
+     *
+     * @param  array $lines
+     *         the output of /usr/bin/sw_vers
+     * @param  string $fieldName
+     *         the field that we are looking for
+     * @return string|null
+     *         the value of the field (if found)
+     */
     private static function extractField($lines, $fieldName)
     {
         $matches = FilterForMatchingString::against($lines, $fieldName);
@@ -119,6 +189,10 @@ class BuildTypeFromSwVers implements BuildTypeFromFile
         return TrimWhitespace::from(FilterColumns::from($matches[0], '1', ':'));
     }
 
+    /**
+     * map of operating system names to OsTypes
+     * @var array
+     */
     private static $osTypes = [
         'Mac OS X' => OSX::class,
     ];

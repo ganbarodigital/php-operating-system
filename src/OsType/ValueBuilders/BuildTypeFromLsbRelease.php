@@ -60,15 +60,15 @@ class BuildTypeFromLsbRelease implements BuildTypeFromFile
      * use the output of /usr/bin/lsb_release (if present) to determine which
      * Linux distro we are using
      *
-     * @param  string $path
+     * @param  string $pathToBinary
      *         path to the binary to run
      * @return null|OsType
      *         OsType if we know which Linux distro we are using
      *         null otherwise
      */
-    public function __invoke($path = "/usr/bin/lsb_release")
+    public function __invoke($pathToBinary = "/usr/bin/lsb_release")
     {
-        return self::usingPath($path);
+        return self::usingPath($pathToBinary);
     }
 
     /**
@@ -88,7 +88,7 @@ class BuildTypeFromLsbRelease implements BuildTypeFromFile
      * use the output of /usr/bin/lsb_release (if present) to determine which
      * Linux distro we are using
      *
-     * @param  string $path
+     * @param  string $pathToBinary
      *         path to the binary to run
      * @return null|OsType
      *         OsType if we know which Linux distro we are using
