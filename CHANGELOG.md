@@ -18,3 +18,4 @@
   * Added `GanbaroDigital\OperatingSystem\OsType\ValueBuilders\BuildTypeFromEtcIssue` to use `/etc/issue` to determine which Linux distro
   * Added `GanbaroDigital\OperatingSystem\OsType\ValueBuilders\BuildTypeFromEtcRedhatRelease` to use `/etc/redhat-release` to determine which Redhat Linux-based distro we have
   * Added `GanbaroDigital\OperatingSystem\OsType\ValueBuilders\BuildTypeFromLsbRelease` to use the output of `/usr/bin/lsb_release` to determine which Linux distro we are using
+  * Added `GanbaroDigital\OperatingSystem\OsType\ValueBuilders\BuildTypeFromSwVers` to use the output of `/usr/bin/sw_vers` to determine which operating system we are using
