@@ -12,3 +12,5 @@
   * Added `GanbaroDigital\OperatingSystem\OsType\Values\LinuxMint` for LinuxMint distributions
   * Added `GanbaroDigital\OperatingSystem\OsType\Values\Ubuntu` for Ubuntu server & desktop distributions
   * Added `GanbaroDigital\OperatingSystem\OsType\Values\OSX` for OSX operating systems
+* Support for detecting which kind of operating system we are running on
+  * Added `GanbaroDigital\OperatingSystem\OsType\Checks\HasEtcIssue` to check for Linux-specific distro info
