@@ -48,6 +48,7 @@ use PHPUnit_Framework_TestCase;
 use GanbaroDigital\OperatingSystem\OsType\Values\CentOS;
 use GanbaroDigital\OperatingSystem\OsType\Values\Debian;
 use GanbaroDigital\OperatingSystem\OsType\Values\LinuxMint;
+use GanbaroDigital\OperatingSystem\OsType\Values\OsType;
 use GanbaroDigital\OperatingSystem\OsType\Values\Ubuntu;
 
 /**
@@ -100,38 +101,85 @@ class BuildTypeFromEtcIssueTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Class::Method
+     * @covers ::from
      */
     public function testReturnsNullWhenNoFileExists()
     {
         // ----------------------------------------------------------------
         // setup your test
-        //
-        // explain your test setup here if needed ...
+
+        $path = '/gobbledygook/will-not-exist';
 
         // ----------------------------------------------------------------
         // perform the change
-        //
-        // explain your test here if needed ...
+
+        $actualResult = BuildTypeFromEtcIssue::from($path);
 
         // ----------------------------------------------------------------
         // test the results
-        //
-        // explain what you expect to have happened
 
-        $this->markTestIncomplete('Not yet implemented');
+        $this->assertNull($actualResult);
     }
 
+    /**
+     * @covers ::from
+     */
+    public function testReturnsNullWhenNoMatchingOperatingSystemFound()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/etc-issue-examples/invalid-issue.txt';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromEtcIssue::from($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
+     * @covers ::inDefaultLocation
+     */
+    public function testSupportsCheckingDefaultLocation()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectingType = false;
+        if (file_exists('/etc/issue')) {
+            $expectingType = true;
+        }
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromEtcIssue::inDefaultLocation();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        if ($expectingType) {
+            $this->assertInstanceOf(OsType::class, $actualResult);
+        }
+        else {
+            $this->assertNull($actualResult);
+        }
+    }
 
     public function provideEtcIssueFilesToTest()
     {
         return [
             [
-                __DIR__ . '/centos-6.7.txt',
+                __DIR__ . '/etc-issue-examples/centos-6.7.txt',
                 new CentOS('6.7')
             ],
             [
-                __DIR__ . '/ubuntu-15.04.txt',
+                __DIR__ . '/etc-issue-examples/ubuntu-15.04.txt',
                 new Ubuntu('15.04')
             ]
         ];

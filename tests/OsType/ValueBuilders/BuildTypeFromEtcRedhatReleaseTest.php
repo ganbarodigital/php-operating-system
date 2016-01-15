@@ -100,38 +100,85 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Class::Method
+     * @covers ::from
      */
     public function testReturnsNullWhenNoFileExists()
     {
         // ----------------------------------------------------------------
         // setup your test
-        //
-        // explain your test setup here if needed ...
+
+        $path = '/gobbledygook/will-not-exist';
 
         // ----------------------------------------------------------------
         // perform the change
-        //
-        // explain your test here if needed ...
+
+        $actualResult = BuildTypeFromEtcRedhatRelease::from($path);
 
         // ----------------------------------------------------------------
         // test the results
-        //
-        // explain what you expect to have happened
 
-        $this->markTestIncomplete('Not yet implemented');
+        $this->assertNull($actualResult);
     }
 
+    /**
+     * @covers ::from
+     */
+    public function testReturnsNullWhenNoMatchingOperatingSystemFound()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/etc-redhat-release-examples/invalid-redhat-release.txt';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromEtcRedhatRelease::from($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
+     * @covers ::inDefaultLocation
+     */
+    public function testSupportsCheckingDefaultLocation()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectingType = false;
+        if (file_exists('/etc/redhat-release')) {
+            $expectingType = true;
+        }
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromEtcRedhatRelease::inDefaultLocation();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        if ($expectingType) {
+            $this->assertInstanceOf(OsType::class, $actualResult);
+        }
+        else {
+            $this->assertNull($actualResult);
+        }
+    }
 
     public function provideEtcIssueFilesToTest()
     {
         return [
             [
-                __DIR__ . '/redhat-release-centos-6.7.txt',
+                __DIR__ . '/etc-redhat-release-examples/centos-6.7.txt',
                 new CentOS('6.7')
             ],
             [
-                __DIR__ . '/redhat-release-centos-7.2.txt',
+                __DIR__ . '/etc-redhat-release-examples/centos-7.2.txt',
                 new CentOS('7.2')
             ]
         ];
