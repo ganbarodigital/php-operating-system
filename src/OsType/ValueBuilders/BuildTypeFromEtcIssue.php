@@ -106,18 +106,39 @@ class BuildTypeFromEtcIssue
 
         // do we have a match?
         foreach (self::$osTypes as $regex => $type) {
-            $matches=[];
-            if (!preg_match($regex, $fileContents, $matches)) {
-                continue;
+            if ($result = self::matchTypeToRegex($type, $regex, $fileContents)) {
+                return $result;
             }
-
-            // if we get here, we have a match
-            /** @var OsType a type of operating system */
-            $osType = new $type($matches['version']);
-            return $osType;
         }
 
         return null;
+    }
+
+    /**
+     * does the given regex match our file
+     *
+     * @param  string $type
+     *         the OsType class to return if the regex matches
+     * @param  string $regex
+     *         the regex to try
+     * @param  string $fileContents
+     *         the text that we apply the regex to
+     * @return null|OsType
+     *         OsType if the regex matches
+     *         null otherwise
+     */
+    private static function matchTypeToRegex($type, $regex, $fileContents)
+    {
+        $matches=[];
+        if (!preg_match($regex, $fileContents, $matches)) {
+            return null;
+        }
+
+        // if we get here, we have a match
+        /** @var OsType a type of operating system */
+        $osType = new $type($matches['version']);
+        return $osType;
+
     }
 
     /**

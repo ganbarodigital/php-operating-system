@@ -59,6 +59,7 @@ class BuildTypeFromEtcIssueTest extends PHPUnit_Framework_TestCase
     /**
      * @covers ::__invoke
      * @covers ::from
+     * @covers ::matchTypeToRegex
      * @dataProvider provideEtcIssueFilesToTest
      */
     public function testCanUseAsObject($path, $expectedResult)
@@ -81,6 +82,7 @@ class BuildTypeFromEtcIssueTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::from
+     * @covers ::matchTypeToRegex
      * @dataProvider provideEtcIssueFilesToTest
      */
     public function testCanCallStatically($path, $expectedResult)
@@ -123,6 +125,7 @@ class BuildTypeFromEtcIssueTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::from
+     * @covers ::matchTypeToRegex
      */
     public function testReturnsNullWhenNoMatchingOperatingSystemFound()
     {
