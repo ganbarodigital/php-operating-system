@@ -44,6 +44,7 @@
 namespace GanbaroDigital\OperatingSystem\OsType\ValueBuilders;
 
 use GanbaroDigital\Filesystem\Checks\IsExecutableFile;
+use GanbaroDigital\OperatingSystem\OsType\Values\OsType;
 use GanbaroDigital\OperatingSystem\OsType\Values\OSX;
 use GanbaroDigital\ProcessRunner\ProcessRunners\PopenProcessRunner;
 use GanbaroDigital\TextTools\Editors\TrimWhitespace;
@@ -119,7 +120,7 @@ class BuildTypeFromSwVers implements BuildTypeFromFile
     {
         $output = self::getOutputFromBinary($pathToBinary);
         if ($output === null) {
-            return null;
+            return [null, null];
         }
 
         return self::extractOsDetails($output);
@@ -130,7 +131,7 @@ class BuildTypeFromSwVers implements BuildTypeFromFile
      *
      * @param  string $pathToBinary
      *         path to the binary to call
-     * @return string
+     * @return string|null
      *         output from the binary
      */
     private static function getOutputFromBinary($pathToBinary)
