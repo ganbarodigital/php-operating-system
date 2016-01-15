@@ -55,7 +55,7 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers ::__invoke
-     * @covers ::usingBinary
+     * @covers ::usingPath
      * @dataProvider provideSwVersExamplesToTest
      */
     public function testCanUseAsObject($path, $expectedResult)
@@ -77,7 +77,7 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::usingBinary
+     * @covers ::usingPath
      * @dataProvider provideSwVersExamplesToTest
      */
     public function testCanCallStatically($path, $expectedResult)
@@ -89,7 +89,7 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromSwVers::usingBinary($path);
+        $actualResult = BuildTypeFromSwVers::usingPath($path);
 
         // ----------------------------------------------------------------
         // test the results
@@ -98,7 +98,7 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::usingBinary
+     * @covers ::usingPath
      */
     public function testReturnsNullWhenNoLsbReleaseBinaryFound()
     {
@@ -110,7 +110,7 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromSwVers::usingBinary($path);
+        $actualResult = BuildTypeFromSwVers::usingPath($path);
 
         // ----------------------------------------------------------------
         // test the results
@@ -119,7 +119,7 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::usingBinary
+     * @covers ::usingPath
      */
     public function testReturnsNullWhenNoMatchingOperatingSystemFound()
     {
@@ -131,7 +131,7 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromSwVers::usingBinary($path);
+        $actualResult = BuildTypeFromSwVers::usingPath($path);
 
         // ----------------------------------------------------------------
         // test the results

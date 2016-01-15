@@ -57,7 +57,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers ::__invoke
-     * @covers ::from
+     * @covers ::usingPath
      * @covers ::matchContentsToType
      * @covers ::matchTypeToRegex
      * @dataProvider provideEtcIssueFilesToTest
@@ -81,7 +81,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::from
+     * @covers ::usingPath
      * @covers ::matchContentsToType
      * @covers ::matchTypeToRegex
      *
@@ -96,7 +96,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromEtcRedhatRelease::from($path);
+        $actualResult = BuildTypeFromEtcRedhatRelease::usingPath($path);
 
         // ----------------------------------------------------------------
         // test the results
@@ -105,7 +105,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::from
+     * @covers ::usingPath
      */
     public function testReturnsNullWhenNoFileExists()
     {
@@ -117,7 +117,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromEtcRedhatRelease::from($path);
+        $actualResult = BuildTypeFromEtcRedhatRelease::usingPath($path);
 
         // ----------------------------------------------------------------
         // test the results
@@ -126,7 +126,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::from
+     * @covers ::usingPath
      * @covers ::matchContentsToType
      * @covers ::matchTypeToRegex
      */
@@ -140,7 +140,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromEtcRedhatRelease::from($path);
+        $actualResult = BuildTypeFromEtcRedhatRelease::usingPath($path);
 
         // ----------------------------------------------------------------
         // test the results
@@ -149,9 +149,9 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::inDefaultLocation
+     * @covers ::usingDefaultPath
      */
-    public function testSupportsCheckingDefaultLocation()
+    public function testSupportsCheckingDefaultPath()
     {
         // ----------------------------------------------------------------
         // setup your test
@@ -164,7 +164,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromEtcRedhatRelease::inDefaultLocation();
+        $actualResult = BuildTypeFromEtcRedhatRelease::usingDefaultPath();
 
         // ----------------------------------------------------------------
         // test the results

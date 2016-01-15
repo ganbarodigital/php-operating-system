@@ -51,7 +51,7 @@ use GanbaroDigital\OperatingSystem\OsType\Values\LinuxMint;
 use GanbaroDigital\OperatingSystem\OsType\Values\OsType;
 use GanbaroDigital\OperatingSystem\OsType\Values\Ubuntu;
 
-class BuildTypeFromEtcIssue
+class BuildTypeFromEtcIssue implements BuildTypeFromFile
 {
     /**
      * use /etc/issue (if it exists) to work out what operating system we
@@ -65,7 +65,7 @@ class BuildTypeFromEtcIssue
      */
     public function __invoke($path = '/etc/issue')
     {
-        return self::from($path);
+        return self::usingPath($path);
     }
 
     /**
@@ -76,9 +76,9 @@ class BuildTypeFromEtcIssue
      *         OsType if we can determine the operating system
      *         null if we cannot
      */
-    public static function inDefaultLocation()
+    public static function usingDefaultPath()
     {
-        return self::from('/etc/issue');
+        return self::usingPath('/etc/issue');
     }
 
     /**
@@ -91,7 +91,7 @@ class BuildTypeFromEtcIssue
      *         OsType if we can determine the operating system
      *         null if we cannot
      */
-    public static function from($path)
+    public static function usingPath($path)
     {
         // make sure we have the file!
         if (!HasEtcIssue::check($path)) {

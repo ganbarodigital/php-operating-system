@@ -58,7 +58,7 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers ::__invoke
-     * @covers ::usingBinary
+     * @covers ::usingPath
      * @dataProvider provideLsbReleaseExamplesToTest
      */
     public function testCanUseAsObject($path, $expectedResult)
@@ -80,7 +80,7 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::usingBinary
+     * @covers ::usingPath
      * @dataProvider provideLsbReleaseExamplesToTest
      */
     public function testCanCallStatically($path, $expectedResult)
@@ -92,7 +92,7 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromLsbRelease::usingBinary($path);
+        $actualResult = BuildTypeFromLsbRelease::usingPath($path);
 
         // ----------------------------------------------------------------
         // test the results
@@ -101,7 +101,7 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::usingBinary
+     * @covers ::usingPath
      */
     public function testReturnsNullWhenNoLsbReleaseBinaryFound()
     {
@@ -113,7 +113,7 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromLsbRelease::usingBinary($path);
+        $actualResult = BuildTypeFromLsbRelease::usingPath($path);
 
         // ----------------------------------------------------------------
         // test the results
@@ -122,7 +122,7 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::usingBinary
+     * @covers ::usingPath
      */
     public function testReturnsNullWhenNoMatchingOperatingSystemFound()
     {
@@ -134,7 +134,7 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = BuildTypeFromLsbRelease::usingBinary($path);
+        $actualResult = BuildTypeFromLsbRelease::usingPath($path);
 
         // ----------------------------------------------------------------
         // test the results

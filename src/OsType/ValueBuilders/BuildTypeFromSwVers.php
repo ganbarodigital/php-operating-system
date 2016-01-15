@@ -50,19 +50,19 @@ use GanbaroDigital\TextTools\Editors\TrimWhitespace;
 use GanbaroDigital\TextTools\Filters\FilterForMatchingString;
 use GanbaroDigital\TextTools\Filters\FilterColumns;
 
-class BuildTypeFromSwVers
+class BuildTypeFromSwVers implements BuildTypeFromFile
 {
     public function __invoke($path = "/usr/bin/sw_vers")
     {
-        return self::usingBinary($path);
+        return self::usingPath($path);
     }
 
     public static function usingDefaultPath()
     {
-        return self::usingBinary("/usr/bin/sw_vers");
+        return self::usingPath("/usr/bin/sw_vers");
     }
 
-    public static function usingBinary($pathToBinary)
+    public static function usingPath($pathToBinary)
     {
         $output = self::getOutputFromBinary($pathToBinary);
         if ($output === null) {

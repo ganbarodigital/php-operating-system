@@ -54,7 +54,7 @@ use GanbaroDigital\TextTools\Editors\TrimWhitespace;
 use GanbaroDigital\TextTools\Filters\FilterForMatchingString;
 use GanbaroDigital\TextTools\Filters\FilterColumns;
 
-class BuildTypeFromLsbRelease
+class BuildTypeFromLsbRelease implements BuildTypeFromFile
 {
     /**
      * use the output of /usr/bin/lsb_release (if present) to determine which
@@ -68,7 +68,7 @@ class BuildTypeFromLsbRelease
      */
     public function __invoke($path = "/usr/bin/lsb_release")
     {
-        return self::usingBinary($path);
+        return self::usingPath($path);
     }
 
     /**
@@ -81,7 +81,7 @@ class BuildTypeFromLsbRelease
      */
     public static function usingDefaultPath()
     {
-        return self::usingBinary("/usr/bin/lsb_release");
+        return self::usingPath("/usr/bin/lsb_release");
     }
 
     /**
@@ -94,7 +94,7 @@ class BuildTypeFromLsbRelease
      *         OsType if we know which Linux distro we are using
      *         null otherwise
      */
-    public static function usingBinary($pathToBinary)
+    public static function usingPath($pathToBinary)
     {
         list($distroName, $distroVersion) = self::getDistroDetails($pathToBinary);
         if ($distroName === null || $distroVersion === null) {

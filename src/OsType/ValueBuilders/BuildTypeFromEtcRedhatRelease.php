@@ -48,7 +48,7 @@ use GanbaroDigital\OperatingSystem\OsType\Checks\HasEtcRedhatRelease;
 use GanbaroDigital\OperatingSystem\OsType\Values\CentOS;
 use GanbaroDigital\OperatingSystem\OsType\Values\OsType;
 
-class BuildTypeFromEtcRedhatRelease
+class BuildTypeFromEtcRedhatRelease implements BuildTypeFromFile
 {
     /**
      * use /etc/redhat-release (if it exists) to work out what flavour of
@@ -62,7 +62,7 @@ class BuildTypeFromEtcRedhatRelease
      */
     public function __invoke($path = '/etc/redhat-release')
     {
-        return self::from($path);
+        return self::usingPath($path);
     }
 
     /**
@@ -73,9 +73,9 @@ class BuildTypeFromEtcRedhatRelease
      *         OsType if we can determine the operating system
      *         null if we cannot
      */
-    public static function inDefaultLocation()
+    public static function usingDefaultPath()
     {
-        return self::from('/etc/redhat-release');
+        return self::usingPath('/etc/redhat-release');
     }
 
     /**
@@ -88,7 +88,7 @@ class BuildTypeFromEtcRedhatRelease
      *         OsType if we can determine the operating system
      *         null if we cannot
      */
-    public static function from($path)
+    public static function usingPath($path)
     {
         // make sure we have the file!
         if (!HasEtcRedhatRelease::check($path)) {
