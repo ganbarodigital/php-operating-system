@@ -73,7 +73,7 @@ class BuildTypeFromEtcRedhatRelease
      *         OsType if we can determine the operating system
      *         null if we cannot
      */
-    public function inDefaultLocation()
+    public static function inDefaultLocation()
     {
         return self::from('/etc/redhat-release');
     }
