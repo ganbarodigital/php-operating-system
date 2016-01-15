@@ -58,6 +58,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
     /**
      * @covers ::__invoke
      * @covers ::from
+     * @covers ::matchContentsToType
      * @covers ::matchTypeToRegex
      * @dataProvider provideEtcIssueFilesToTest
      */
@@ -81,7 +82,9 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::from
+     * @covers ::matchContentsToType
      * @covers ::matchTypeToRegex
+     *
      * @dataProvider provideEtcIssueFilesToTest
      */
     public function testCanCallStatically($path, $expectedResult)
@@ -103,7 +106,6 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::from
-     * @covers ::matchTypeToRegex
      */
     public function testReturnsNullWhenNoFileExists()
     {
@@ -125,6 +127,7 @@ class BuildTypeFromEtcRedhatReleaseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::from
+     * @covers ::matchContentsToType
      * @covers ::matchTypeToRegex
      */
     public function testReturnsNullWhenNoMatchingOperatingSystemFound()

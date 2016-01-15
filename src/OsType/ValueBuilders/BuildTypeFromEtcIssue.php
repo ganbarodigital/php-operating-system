@@ -105,6 +105,20 @@ class BuildTypeFromEtcIssue
         $fileContents = file_get_contents($path);
 
         // do we have a match?
+        return self::matchContentsToType($fileContents);
+    }
+
+    /**
+     * do we have a regex that matches the contents of our file?
+     *
+     * @param  string $fileContents
+     *         the contents of the file to check
+     * @return null|OsType
+     *         OsType if we can determine the operating system
+     *         null if we cannot
+     */
+    private static function matchContentsToType($fileContents)
+    {
         foreach (self::$osTypes as $regex => $type) {
             if ($result = self::matchTypeToRegex($type, $regex, $fileContents)) {
                 return $result;
