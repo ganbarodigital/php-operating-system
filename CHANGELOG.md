@@ -14,4 +14,6 @@
   * Added `GanbaroDigital\OperatingSystem\OsType\Values\OSX` for OSX operating systems
 * Support for detecting which kind of operating system we are running on
   * Added `GanbaroDigital\OperatingSystem\OsType\Checks\HasEtcIssue` to check for Linux-specific distro info
+  * Added `GanbaroDigital\OperatingSystem\OsType\Checks\HasEtcRedhatRelease` to check for a Redhat Linux-based distro
   * Added `GanbaroDigital\OperatingSystem\OsType\ValueBuilders\BuildTypeFromEtcIssue` to use `/etc/issue` to determine which Linux distro
+  * Added `GanbaroDigital\OperatingSystem\OsType\ValueBuilders\BuildTypeFromEtcRedhatRelease` to use `/etc/redhat-release` to determine which Redhat Linux-based distro we have
