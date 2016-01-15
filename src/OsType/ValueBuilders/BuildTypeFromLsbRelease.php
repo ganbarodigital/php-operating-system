@@ -47,6 +47,7 @@ use GanbaroDigital\Filesystem\Checks\IsExecutableFile;
 use GanbaroDigital\OperatingSystem\OsType\Values\CentOS;
 use GanbaroDigital\OperatingSystem\OsType\Values\Debian;
 use GanbaroDigital\OperatingSystem\OsType\Values\LinuxMint;
+use GanbaroDigital\OperatingSystem\OsType\Values\OsType;
 use GanbaroDigital\OperatingSystem\OsType\Values\Ubuntu;
 use GanbaroDigital\ProcessRunner\ProcessRunners\PopenProcessRunner;
 use GanbaroDigital\TextTools\Editors\TrimWhitespace;
@@ -55,24 +56,47 @@ use GanbaroDigital\TextTools\Filters\FilterColumns;
 
 class BuildTypeFromLsbRelease
 {
+    /**
+     * use the output of /usr/bin/lsb_release (if present) to determine which
+     * Linux distro we are using
+     *
+     * @param  string $path
+     *         path to the binary to run
+     * @return null|OsType
+     *         OsType if we know which Linux distro we are using
+     *         null otherwise
+     */
     public function __invoke($path = "/usr/bin/lsb_release")
     {
         return self::usingBinary($path);
     }
 
+    /**
+     * use the output of /usr/bin/lsb_release (if present) to determine which
+     * Linux distro we are using
+     *
+     * @return null|OsType
+     *         OsType if we know which Linux distro we are using
+     *         null otherwise
+     */
     public static function usingDefaultPath()
     {
         return self::usingBinary("/usr/bin/lsb_release");
     }
 
+    /**
+     * use the output of /usr/bin/lsb_release (if present) to determine which
+     * Linux distro we are using
+     *
+     * @param  string $path
+     *         path to the binary to run
+     * @return null|OsType
+     *         OsType if we know which Linux distro we are using
+     *         null otherwise
+     */
     public static function usingBinary($pathToBinary)
     {
-        $output = self::getOutputFromBinary($pathToBinary);
-        if ($output === null) {
-            return null;
-        }
-
-        list($distroName, $distroVersion) = self::extractDistroDetails($output);
+        list($distroName, $distroVersion) = self::getDistroDetails($pathToBinary);
         if ($distroName === null || $distroVersion === null) {
             return null;
         }
@@ -82,10 +106,38 @@ class BuildTypeFromLsbRelease
             return null;
         }
 
+        // yes, we do :)
         $osType = new self::$osTypes[$distroName]($distroVersion);
         return $osType;
     }
 
+    /**
+     * get the Linux distro name & version from /usr/bin/lsb_release
+     *
+     * @param  string $pathToBinary
+     *         the binary to call to get the LSB details
+     * @return array
+     *         [0] is the Linux distro name
+     *         [1] is the Linux distro version
+     */
+    private static function getDistroDetails($pathToBinary)
+    {
+        $output = self::getOutputFromBinary($pathToBinary);
+        if ($output === null) {
+            return [null, null];
+        }
+
+        return self::extractDistroDetails($output);
+    }
+
+    /**
+     * call /usr/bin/lsb_release and return the output
+     *
+     * @param  string $pathToBinary
+     *         path to the binary to call
+     * @return string
+     *         output from the binary
+     */
     private static function getOutputFromBinary($pathToBinary)
     {
         // make sure we have an executable binary
@@ -103,6 +155,15 @@ class BuildTypeFromLsbRelease
         return $result->getOutput();
     }
 
+    /**
+     * extract the info we need from the output of /usr/bin/lsb_release
+     *
+     * @param  string $output
+     *         the output from running the command
+     * @return array
+     *         [0] is the Linux distro name
+     *         [1] is the Linux distro version
+     */
     private static function extractDistroDetails($output)
     {
         // what do we have?
@@ -110,15 +171,23 @@ class BuildTypeFromLsbRelease
         $distroName = self::extractField($lines, 'Distributor ID:');
         $distroVersion = self::extractField($lines, 'Release:');
 
-        if ($distroName === null || $distroVersion === null) {
-            return null;
+        if ($distroVersion !== null) {
+            $distroVersion = FilterColumns::from($distroVersion, '0-1', '.');
         }
-
-        $distroVersion = FilterColumns::from($distroVersion, '0-1', '.');
 
         return [$distroName, $distroVersion];
     }
 
+    /**
+     * extract a named field from the output of /usr/bin/lsb_release
+     *
+     * @param  array $lines
+     *         the output of /usr/bin/lsb_release
+     * @param  string $fieldName
+     *         the field that we are looking for
+     * @return string|null
+     *         the value of the field (if found)
+     */
     private static function extractField($lines, $fieldName)
     {
         $matches = FilterForMatchingString::against($lines, $fieldName);
@@ -128,6 +197,10 @@ class BuildTypeFromLsbRelease
         return TrimWhitespace::from(FilterColumns::from($matches[0], '1', ':'));
     }
 
+    /**
+     * a map of distro names onto OsType classes
+     * @var array
+     */
     private static $osTypes = [
         'CentOS' => CentOS::class,
         'Debian' => Debian::class,
