@@ -106,7 +106,8 @@ class BuildTypeFromLsbRelease implements BuildTypeFromFile
             return null;
         }
 
-        // yes, we do :)
+        // yes, we have a match
+        /** @var OsType */
         $osType = new self::$osTypes[$distroName]($distroVersion);
         return $osType;
     }

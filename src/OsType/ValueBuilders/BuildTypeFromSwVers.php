@@ -103,6 +103,7 @@ class BuildTypeFromSwVers implements BuildTypeFromFile
             return null;
         }
 
+        /** @var OsType */
         $osType = new self::$osTypes[$productName]($productVersion);
         return $osType;
     }
