@@ -69,8 +69,6 @@ class BuildTypeFromEtcRedhatRelease
      * use /etc/redhat-release (if it exists) to work out what flavour of
      * RedHat Linux we are looking at
      *
-     * @param  string $path
-     *         path to the file to parse
      * @return null|OsType
      *         OsType if we can determine the operating system
      *         null if we cannot
@@ -111,6 +109,7 @@ class BuildTypeFromEtcRedhatRelease
             }
 
             // if we get here, we have a match
+            /** @var OsType a type of operating system */
             $osType = new $type($matches['version']);
             return $osType;
         }

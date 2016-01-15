@@ -72,8 +72,6 @@ class BuildTypeFromEtcIssue
      * use /etc/issue (if it exists) to work out what operating system we
      * are looking at
      *
-     * @param  string $path
-     *         path to the file to parse
      * @return null|OsType
      *         OsType if we can determine the operating system
      *         null if we cannot
@@ -114,6 +112,7 @@ class BuildTypeFromEtcIssue
             }
 
             // if we get here, we have a match
+            /** @var OsType a type of operating system */
             $osType = new $type($matches['version']);
             return $osType;
         }
