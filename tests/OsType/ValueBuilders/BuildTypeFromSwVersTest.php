@@ -56,6 +56,10 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
     /**
      * @covers ::__invoke
      * @covers ::usingPath
+     * @covers ::getOsDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractOsDetails
+     * @covers ::extractField
      * @dataProvider provideSwVersExamplesToTest
      */
     public function testCanUseAsObject($path, $expectedResult)
@@ -78,6 +82,10 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::usingPath
+     * @covers ::getOsDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractOsDetails
+     * @covers ::extractField
      * @dataProvider provideSwVersExamplesToTest
      */
     public function testCanCallStatically($path, $expectedResult)
@@ -99,13 +107,109 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::usingPath
+     * @covers ::getOsDetails
+     * @covers ::getOutputFromBinary
      */
-    public function testReturnsNullWhenNoLsbReleaseBinaryFound()
+    public function testReturnsNullWhenNoSwVersBinaryFound()
     {
         // ----------------------------------------------------------------
         // setup your test
 
         $path = '/gobbledygook/will-not-exist';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromSwVers::usingPath($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
+     * @covers ::usingPath
+     * @covers ::getOsDetails
+     * @covers ::getOutputFromBinary
+     */
+    public function testReturnsNullWhenNoSwVersIsNotExecutable()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/etc-issue-examples/invalid-issue.txt';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromSwVers::usingPath($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
+     * @covers ::usingPath
+     * @covers ::getOsDetails
+     * @covers ::getOutputFromBinary
+     */
+    public function testReturnsNullWhenNoSwVersReturnsAnError()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/sw_vers-examples/erroring.php';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromSwVers::usingPath($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
+     * @covers ::usingPath
+     * @covers ::getOsDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractField
+     */
+    public function testReturnsNullWhenNoSwVersHasNoProductNameField()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/sw_vers-examples/no-product-name.php';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromSwVers::usingPath($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
+     * @covers ::usingPath
+     * @covers ::getOsDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractField
+     */
+    public function testReturnsNullWhenNoSwVersHasNoProductVersionField()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/sw_vers-examples/no-product-version.php';
 
         // ----------------------------------------------------------------
         // perform the change
@@ -126,7 +230,7 @@ class BuildTypeFromSwVersTest extends PHPUnit_Framework_TestCase
         // ----------------------------------------------------------------
         // setup your test
 
-        $path = __DIR__ . '/etc-issue-examples/invalid-issue.txt';
+        $path = __DIR__ . '/sw_vers-examples/unsupported-os.php';
 
         // ----------------------------------------------------------------
         // perform the change

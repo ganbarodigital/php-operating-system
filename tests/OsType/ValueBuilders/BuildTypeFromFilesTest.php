@@ -83,6 +83,7 @@ class BuildTypeFromFilesTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::usingPaths
+     * @covers ::buildUsingBuilder
      * @dataProvider providePathsToTest
      */
     public function testCanCallStatically($paths, $expectedResult)
@@ -101,6 +102,56 @@ class BuildTypeFromFilesTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedResult, $actualResult);
     }
+
+    /**
+     * @covers ::usingDefaultPaths
+     * @covers ::buildUsingBuilder
+     */
+    public function testCanUseWithNoPaths()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+        //
+        // explain your test setup here if needed ...
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromFiles::usingDefaultPaths();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertInstanceOf(OsType::class, $actualResult);
+    }
+
+    /**
+     * @covers ::usingPaths
+     * @covers ::buildUsingBuilder
+     */
+    public function testReturnsNullWhenNoMatchFound()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $paths = [
+            BuildTypeFromLsbRelease::class => __DIR__ . '/etc-issue-examples/invalid-issue.txt',
+            BuildTypeFromEtcRedhatRelease::class => __DIR__ . '/etc-issue-examples/invalid-issue.txt',
+            BuildTypeFromEtcIssue::class => __DIR__ . '/etc-issue-examples/invalid-issue.txt',
+            BuildTypeFromSwVers::class => __DIR__ . '/etc-issue-examples/invalid-issue.txt'
+            ];
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromFiles::usingPaths($paths);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
 
     public function providePathsToTest()
     {

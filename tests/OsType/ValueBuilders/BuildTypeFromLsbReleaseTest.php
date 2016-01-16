@@ -59,6 +59,10 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
     /**
      * @covers ::__invoke
      * @covers ::usingPath
+     * @covers ::getDistroDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractDistroDetails
+     * @covers ::extractField
      * @dataProvider provideLsbReleaseExamplesToTest
      */
     public function testCanUseAsObject($path, $expectedResult)
@@ -81,6 +85,10 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::usingPath
+     * @covers ::getDistroDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractDistroDetails
+     * @covers ::extractField
      * @dataProvider provideLsbReleaseExamplesToTest
      */
     public function testCanCallStatically($path, $expectedResult)
@@ -102,6 +110,8 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::usingPath
+     * @covers ::getDistroDetails
+     * @covers ::getOutputFromBinary
      */
     public function testReturnsNullWhenNoLsbReleaseBinaryFound()
     {
@@ -123,8 +133,10 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::usingPath
+     * @covers ::getDistroDetails
+     * @covers ::getOutputFromBinary
      */
-    public function testReturnsNullWhenNoMatchingOperatingSystemFound()
+    public function testReturnsNullWhenLsbReleaseIsNotExecutable()
     {
         // ----------------------------------------------------------------
         // setup your test
@@ -143,7 +155,107 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::usingPath
+     * @covers ::getDistroDetails
+     * @covers ::getOutputFromBinary
+     */
+    public function testReturnsNullWhenLsbReleaseReturnsAnError()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/lsb_release-examples/erroring.php';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromLsbRelease::usingPath($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
+     * @covers ::usingPath
+     * @covers ::getDistroDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractDistroDetails
+     * @covers ::extractField
+     */
+    public function testReturnsNullWhenLsbReleaseHasNoDistributorIdField()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/lsb_release-examples/invalid-output-no-distributor.php';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromLsbRelease::usingPath($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
+     * @covers ::usingPath
+     * @covers ::getDistroDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractDistroDetails
+     * @covers ::extractField
+     */
+    public function testReturnsNullWhenLsbReleaseHasNoReleaseField()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/lsb_release-examples/invalid-output-no-release.php';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromLsbRelease::usingPath($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
+     * @covers ::usingPath
+     * @covers ::getDistroDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractDistroDetails
+     */
+    public function testReturnsNullWhenNoMatchingOperatingSystemFound()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $path = __DIR__ . '/lsb_release-examples/unsupported-os.php';
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $actualResult = BuildTypeFromLsbRelease::usingPath($path);
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertNull($actualResult);
+    }
+
+    /**
      * @covers ::usingDefaultPath
+     * @covers ::getDistroDetails
+     * @covers ::getOutputFromBinary
+     * @covers ::extractDistroDetails
      */
     public function testSupportsCheckingDefaultPath()
     {
