@@ -70,7 +70,7 @@ class BuildTypeFromFiles
      *         OsType if we know what kind of operating system we are running on
      *         null otherwise
      */
-    public function usingDefaultPaths()
+    public static function usingDefaultPaths()
     {
         return self::usingPaths();
     }
