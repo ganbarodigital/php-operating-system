@@ -1,7 +1,7 @@
 New BSD License
 ===============
 
-Copyright (c) 2015-present, Ganbaro Digital Ltd
+Copyright (c) 2016-present, Ganbaro Digital Ltd
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
