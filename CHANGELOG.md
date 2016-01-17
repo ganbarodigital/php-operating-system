@@ -2,6 +2,10 @@
 
 ## develop branch
 
+Nothing yet.
+
+## 1.0.0 - Sun Jan 16 2016
+
 ### New
 
 * Support for representing a type of operating system
