@@ -10,7 +10,10 @@
         "ganbarodigital/php-reflection": "^2.12.1",
         "ganbarodigital/php-exceptions": "^1.1",
         "ganbarodigital/php-defensive": "^1.0.1",
-        "ganbarodigital/php-number-tools": "^1.0"
+        "ganbarodigital/php-number-tools": "^1.0",
+        "ganbarodigital/php-file-system": ">=0.3, <2.0.0",
+        "ganbarodigital/php-process-runner": "^0.3.2",
+        "ganbarodigital/php-text-tools": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.6",
