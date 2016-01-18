@@ -205,6 +205,7 @@ class BuildTypeFromLsbRelease implements BuildTypeFromFile
     private static $osTypes = [
         'CentOS' => CentOS::class,
         'Debian' => Debian::class,
+        'LinuxMint' => LinuxMint::class,
         'Ubuntu' => Ubuntu::class,
     ];
 }

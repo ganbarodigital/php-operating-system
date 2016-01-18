@@ -291,6 +291,14 @@ class BuildTypeFromLsbReleaseTest extends PHPUnit_Framework_TestCase
                 new CentOS('7.2')
             ],
             [
+                __DIR__ . '/lsb_release-examples/debian-8.2.php',
+                new Debian('8.2')
+            ],
+            [
+                __DIR__ . '/lsb_release-examples/linuxmint-17.3.php',
+                new LinuxMint('17.3')
+            ],
+            [
                 __DIR__ . '/lsb_release-examples/ubuntu-15.04.php',
                 new Ubuntu('15.04')
             ]
