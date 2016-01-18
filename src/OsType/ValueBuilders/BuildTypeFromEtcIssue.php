@@ -162,6 +162,7 @@ class BuildTypeFromEtcIssue implements BuildTypeFromFile
      */
     private static $osTypes = [
         "|^CentOS release (?<version>\d+\.\d+)|" => CentOS::class,
+        "|^Debian GNU/Linux (?<version>\d+)|" => Debian::class,
         "|^Ubuntu (?<version>\d+\.\d+)|" => Ubuntu::class,
     ];
 }

@@ -2,7 +2,9 @@
 
 ## develop branch
 
-Nothing yet.
+### New
+
+* Support for Debian 8.x (aka Jessie) added.
 
 ## 1.0.0 - Sun Jan 16 2016
 

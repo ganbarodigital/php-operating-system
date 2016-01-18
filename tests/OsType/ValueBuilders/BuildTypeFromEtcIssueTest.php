@@ -185,6 +185,10 @@ class BuildTypeFromEtcIssueTest extends PHPUnit_Framework_TestCase
                 new CentOS('6.7')
             ],
             [
+                __DIR__ . '/etc-issue-examples/debian-8.txt',
+                new Debian('8'),
+            ],
+            [
                 __DIR__ . '/etc-issue-examples/ubuntu-15.04.txt',
                 new Ubuntu('15.04')
             ]
