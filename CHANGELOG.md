@@ -5,6 +5,7 @@
 ### New
 
 * Support for Debian 8.x (aka Jessie) added.
+* Support for LinuxMint 17.3 (aka Rosa) added.
 
 ## 1.0.0 - Sun Jan 16 2016
 
