@@ -46,44 +46,9 @@ namespace GanbaroDigital\OperatingSystem\OsType\Values;
 /**
  * represents information about which type of operating system this
  * code is running on
+ *
+ * OSX and Hackintoshes should subclass this
  */
-class OSX extends Darwin implements OsType
+abstract class Darwin implements OsType
 {
-    /**
-     * what version of OSX are we using?
-     *
-     * @var string
-     */
-    private $version;
-
-    /**
-     * our constructor
-     *
-     * @param string $version
-     *        the version of OSX that we are using
-     */
-    public function __construct($version)
-    {
-        $this->version = $version;
-    }
-
-    /**
-     * what is the human-readable name of this operating system?
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'OSX';
-    }
-
-    /**
-     * what version of the operating system do we have?
-     *
-     * @return string
-     */
-    public function getVersion()
-    {
-        return $this->version;
-    }
 }

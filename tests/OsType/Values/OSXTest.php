@@ -91,6 +91,25 @@ class OSXTest extends PHPUnit_Framework_TestCase
     /**
      * @covers ::__construct
      */
+    public function testIsDarwin()
+    {
+        // ----------------------------------------------------------------
+        // setup your test
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit = new OSX('10.11.2');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertInstanceOf(Darwin::class, $unit);
+    }
+
+    /**
+     * @covers ::__construct
+     */
     public function testIsOsType()
     {
         // ----------------------------------------------------------------

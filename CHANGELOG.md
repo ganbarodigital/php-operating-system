@@ -2,7 +2,9 @@
 
 ## develop branch
 
-Nothing yet.
+### Fix
+
+* The `OSX` operating system type is now also a `Darwin` type.
 
 ## 1.1.0 - Mon Jan 17 2016
 
