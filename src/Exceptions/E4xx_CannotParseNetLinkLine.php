@@ -48,14 +48,14 @@ use GanbaroDigital\Exceptions\Traits\UnsupportedType;
 class E4xx_CannotParseNetLinkLine extends E4xx_OperatingSystemException
 {
     /**
-     * exception thrown when we have an input line that we cannot classify
+     * exception thrown when we have an input line that we cannot parse
      *
      * @param string $line
-     *        the line that we cannot classify
+     *        the line that we cannot parse
      */
     public function __construct($line)
     {
-        $message = "cannot classify line: {$line}";
+        $message = "cannot parse line: {$line}";
         return parent::__construct(400, $message);
     }
 }
