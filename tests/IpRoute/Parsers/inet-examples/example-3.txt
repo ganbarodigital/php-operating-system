@@ -1,0 +1,2 @@
+inet 192.168.1.117/24 brd 192.168.1.255 scope global dynamic eth0
+   valid_lft 2890sec preferred_lft 2890sec
