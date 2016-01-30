@@ -2,6 +2,14 @@
 
 ## develop branch
 
+### New
+
+* Added a basic exception hierarchy
+  * Added `GanbaroDigital\OperatingSystem\Exceptions\Exxx_OperatingSystemException`
+  * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_OperatingSystemException`
+  * Added `GanbaroDigital\OperatingSystem\Exceptions\E5xx_OperatingSystemException`
+  * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_UnsupportedType`
+
 ### Fix
 
 * The `OSX` operating system type is now also a `Darwin` type.
