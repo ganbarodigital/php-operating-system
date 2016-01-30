@@ -9,6 +9,11 @@
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_OperatingSystemException`
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E5xx_OperatingSystemException`
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_UnsupportedType`
+* Added a representation of network interfaces
+  * Added `GanbaroDigital\OperatingSystem\NetInterfaces\Values\Inet6Address`
+  * Added `GanbaroDigital\OperatingSystem\NetInterfaces\Values\InetAddress`
+  * Added `GanbaroDigital\OperatingSystem\NetInterfaces\Values\NetInterface`
+  * Added `GanbaroDigital\OperatingSystem\NetInterfaces\Values\NetLink`
 
 ### Fix
 
