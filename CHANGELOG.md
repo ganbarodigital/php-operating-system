@@ -16,8 +16,10 @@
   * Added `GanbaroDigital\OperatingSystem\NetInterfaces\Values\NetLink`
 * Support for parsing the output of the 'ip addr show' command from Linux-based systems.
   * Added `GanbaroDigital\OperatingSystem\Exceptions\CannotParseInetAddressLine`
+  * Added `GanbaroDigital\OperatingSystem\Exceptions\CannotParseInet6AddressLine`
   * Added `GanbaroDigital\OperatingSystem\Exceptions\CannotParseNetLinkLine`
   * Added `GanbaroDigital\OperatingSystem\IpRoute\Parsers\ParseInetAddress`
+  * Added `GanbaroDigital\OperatingSystem\IpRoute\Parsers\ParseInet6Address`
   * Added `GanbaroDigital\OperatingSystem\IpRoute\Parsers\ParseNetLink`
 
 ### Fix

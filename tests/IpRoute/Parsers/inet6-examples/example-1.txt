@@ -1,0 +1,2 @@
+inet6 3ffe:2400:0:1:2a0:ccff:fe66:1878/64 scope global dynamic
+       valid_lft forever preferred_lft 604746sec
