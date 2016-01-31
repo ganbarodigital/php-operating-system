@@ -135,6 +135,7 @@ class ParseNetInterface
         $linkLines = [];
         $inetLines = [];
         $inet6Lines = [];
+        $optionsTarget = 'inetLines';
 
         // what do we have?
         try {

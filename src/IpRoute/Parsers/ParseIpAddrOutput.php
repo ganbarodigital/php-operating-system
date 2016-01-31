@@ -89,7 +89,7 @@ class ParseIpAddrOutput
     /**
      * parse the output of the 'ip addr show' command
      *
-     * @param  Traversable $output
+     * @param  Traversable|array $output
      *         the output to parse
      * @return array<NetInterface>
      *         a list of the network interfaces extracted from the given

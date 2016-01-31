@@ -69,7 +69,9 @@ class InetAddress
     /**
      * what is the broadcast address assigned to the network interface?
      *
-     * @var this is in the classic A.B.C.D format
+     * this is in the classic A.B.C.D format
+     *
+     * @var string
      */
     protected $broadcastAddress;
 

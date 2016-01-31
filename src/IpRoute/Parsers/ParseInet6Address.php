@@ -67,6 +67,14 @@ class ParseInet6Address
         return self::from($inet6Lines);
     }
 
+    /**
+     * parse an inet6 (IPv6) address block from the output of 'ip addr show'
+     *
+     * @param  mixed $inet6Lines
+     *         the line(s) to parse
+     * @return Inet6Address
+     *         the inet address defined in the output
+     */
     public static function from($inet6Lines)
     {
         $method = MapTypeToMethod::using($inet6Lines, self::$dispatchMap);
@@ -100,7 +108,7 @@ class ParseInet6Address
      *
      * @param  string $inet6Lines
      *         the line(s) to parse
-     * @return InetAddress
+     * @return Inet6Address
      *         the inet address defined in the output
      */
     private static function fromString($inet6Lines)
@@ -115,7 +123,7 @@ class ParseInet6Address
      *
      * @param  array|Traversable $inet6Lines
      *         the line(s) to parse
-     * @return InetAddress
+     * @return Inet6Address
      *         the inet address defined in the output
      */
     private static function fromTraversable($inet6Lines)

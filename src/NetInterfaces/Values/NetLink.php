@@ -66,6 +66,13 @@ class NetLink
     protected $interfaceName;
 
     /**
+     * the name of the interface that this interface is bound to
+     *
+     * @var string|null
+     */
+    protected $interfaceMaster;
+
+    /**
      * a list of the properties advertised for this interface
      *
      * @var array
