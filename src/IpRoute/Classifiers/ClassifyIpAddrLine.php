@@ -56,6 +56,7 @@ class ClassifyIpAddrLine
     const INET_START = 50;
     const INET6_START = 51;
     const INET_OPTIONS = 52;
+    const TEST_NEVER_SUPPORTED = 100;
 
     /**
      * a list of regexes to use to classify an address line
@@ -69,6 +70,7 @@ class ClassifyIpAddrLine
         '|^\s{0,}inet [0-9{1,3}\.]+/|' => self::INET_START,
         '|^\s{0,}inet6 [0-9a-f:]+/|' => self::INET6_START,
         '|^\s{0,}valid_lft |' => self::INET_OPTIONS,
+        '|TEST LINE, NEVER SUPPORTED|' => self::TEST_NEVER_SUPPORTED,
     ];
 
     /**

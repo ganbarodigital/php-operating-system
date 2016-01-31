@@ -1,0 +1,7 @@
+veth8aaf615 Link encap:Ethernet  HWaddr ba:7e:e6:b7:27:af
+          inet6 addr: fe80::b87e:e6ff:feb7:27af/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:696089 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:598137 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:212830614 (212.8 MB)  TX bytes:123396280 (123.3 MB)
