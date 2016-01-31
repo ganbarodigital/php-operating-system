@@ -18,13 +18,16 @@
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_CannotClassifyIpAddrLine`
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_CannotParseInetAddressLine`
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_CannotParseInet6AddressLine`
+  * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_CannotParseIpAddrOutput`
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_CannotParseNetLinkLine`
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E4xx_CannotParseNetInterface`
+  * Added `GanbaroDigital\OperatingSystem\Exceptions\E5xx_CannotParseIpAddrOutput`
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E5xx_CannotParseNetInterface`
   * Added `GanbaroDigital\OperatingSystem\Exceptions\E5xx_UnsupportedIpAddrLine`
   * Added `GanbaroDigital\OperatingSystem\IpRoute\Classifiers\ClassifyIpAddrLine`
   * Added `GanbaroDigital\OperatingSystem\IpRoute\Parsers\ParseInetAddress`
   * Added `GanbaroDigital\OperatingSystem\IpRoute\Parsers\ParseInet6Address`
+  * Added `GanbaroDigital\OperatingSystem\IpRoute\Parsers\ParseIpAddrOutput`
   * Added `GanbaroDigital\OperatingSystem\IpRoute\Parsers\ParseNetLink`
   * Added `GanbaroDigital\OperatingSystem\IpRoute\Parsers\ParseNetInterface`
 
